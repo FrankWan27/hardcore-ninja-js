@@ -1,0 +1,20 @@
+{
+  "name": "hardcore-ninja",
+  "version": "1.0.0",
+  "description": "hardcore ninja",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Frank Wan <frankwan27@gmail.com> (https://frankwan27.github.io/)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/pixi.js": "^5.0.0",
+    "pixi.js": "^4.5.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^3.1.1"
+  }
+}
