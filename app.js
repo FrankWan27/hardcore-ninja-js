@@ -37,11 +37,14 @@ io.sockets.on('connection', (socket) => {
 
 	socket.on('key-press', (data) => {
 		let player = game.players[socket.id]
+		if(data.input === "w") {
+			game.blinkPlayer(socket.id, Vector.of(data.x, data.y))
+		}
 		if(data.input === "e") {
 			game.addShockwave(player, data.x, data.y)
 		}
-		else{
-			console.log("not e")
+		if(data.input === "s") {
+			game.movePlayer(socket.id, player.position)
 		}
 	})
 })
@@ -78,4 +81,4 @@ setInterval(() => {
 		let socket = socketList[id]
 		socket.emit('update', pack)
 	}
-}, 16)
+}, 15.625) //64 ticks per second

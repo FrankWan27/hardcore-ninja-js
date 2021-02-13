@@ -71,4 +71,8 @@ document.onkeydown = function(event){
             x: mouseX, 
             y: mouseY
         });
+    if(event.key == "s") 
+        socket.emit('key-press', {
+            input:'s'
+        })
 }
