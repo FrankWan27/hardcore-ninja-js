@@ -20,6 +20,7 @@ class Shockwave {
 
             let particle = new PIXI.Graphics()
             particle.beginFill(0x40C4FF)
+            //particle.lineStyle(1, 0x008dcc)
             particle.drawPolygon([
                 2 * i + 0, 0,             
                 2 * i + this.size , -this.size * (Math.random() * 8 + 6), //random height between 6 and 14        
@@ -35,7 +36,7 @@ class Shockwave {
     }
 
     drawSprite() {
-        this.sprite = new PIXI.AnimatedSprite(resources["client/sprites/shockwave.json"].spritesheet.animations["shockwave"])
+        this.sprite = new PIXI.AnimatedSprite(resources["./client/sprites/shockwave.json"].spritesheet.animations["shockwave"])
         this.sprite.rotation = this.theta
         this.sprite.position.set(this.position.x, this.position.y)
         this.sprite.animationSpeed = 1

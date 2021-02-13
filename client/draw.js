@@ -9,6 +9,7 @@ let Application = PIXI.Application,
 
 //Init pixijs
 let app = new Application({
+    antialias: true,
     width: 1024,
     height: 768
 })
@@ -18,8 +19,8 @@ document.body.appendChild(app.view);
 
 //load nothing and run the `setup` function when it's done
 loader
-.add("client/sprites/moveIndicator.json")
-.add("client/sprites/shockwave.json")
+.add("./client/sprites/moveIndicator.json")
+.add("./client/sprites/shockwave.json")
 .load(setup);
 
 var players = {}
@@ -44,7 +45,7 @@ function gameLoop() {
 
 class moveIndicator {
     constructor(x, y) {
-        this.sprite = new PIXI.AnimatedSprite(resources["client/sprites/moveIndicator.json"].spritesheet.animations["pixil-frame"])
+        this.sprite = new PIXI.AnimatedSprite(resources["./client/sprites/moveIndicator.json"].spritesheet.animations["pixil-frame"])
         this.sprite.scale.set(0.5, 0.4)
         this.sprite.position.set(x, y)
         this.sprite.animationSpeed = 0.4
