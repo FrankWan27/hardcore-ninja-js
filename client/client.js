@@ -2,6 +2,7 @@
 
 var mouseX = -1;
 var mouseY = -1;
+var myId = -1;
 
 var socket = io() 
 
@@ -41,6 +42,10 @@ socket.on('update', (data) => {
     })
 }) 
 
+socket.on('id', (id) => {
+    myId = id
+})
+
 socket.on('shockwave-die', (data) => {
     shockwaves[data.id].die()
     delete shockwaves[data.id]
@@ -53,18 +58,21 @@ document.onkeydown = function(event){
             x: mouseX, 
             y: mouseY
         });
-    if(event.key === "w")	
+    if(event.key === "w") { //blink 
+        new blinkSprite(players[myId].sprite.position.x, players[myId].sprite.position.y)
         socket.emit('key-press', {
             input:'w', 
             x: mouseX, 
             y: mouseY
         });
-    if(event.key === "e")	
+    }
+    if(event.key === "e") {
         socket.emit('key-press', {
             input:'e', 
             x: mouseX, 
             y: mouseY
         });
+    }
     if(event.key === "r")	
         socket.emit('key-press', {
             input:'r', 

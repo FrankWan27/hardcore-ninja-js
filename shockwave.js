@@ -5,7 +5,7 @@ class Shockwave {
         this.position = Vector.of(startX, startY)
         this.target = Vector.of(targetX, targetY)
         this.speed = 24
-        this.direction = Vector.sub(this.target, this.position).limit(this.speed)
+        this.direction = Vector.sub(this.target, this.position).setMag(this.speed)
         this.owner = owner
         this.lifespan = 20
         this.dead = false

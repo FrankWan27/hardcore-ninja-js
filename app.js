@@ -25,6 +25,8 @@ io.sockets.on('connection', (socket) => {
 
 	console.log('client#' + socket.id + ' connected')
 
+	socket.emit("id", socket.id)
+
 	socket.on('disconnect', () => {
 		console.log('client#' + socket.id + ' disconnected')
 		delete socketList[socket.id]
@@ -38,6 +40,7 @@ io.sockets.on('connection', (socket) => {
 	socket.on('key-press', (data) => {
 		let player = game.players[socket.id]
 		if(data.input === "w") {
+			console.log('blink')
 			game.blinkPlayer(socket.id, Vector.of(data.x, data.y))
 		}
 		if(data.input === "e") {

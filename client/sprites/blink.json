@@ -1,0 +1,78 @@
+{"frames": {
+
+"blink_0.png":
+{
+	"frame": {"x":0,"y":0,"w":160,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":160,"h":100},
+	"sourceSize": {"w":160,"h":100},
+	"anchor": {"x":0.5,"y":0.9}
+},
+"blink_1.png":
+{
+	"frame": {"x":160,"y":0,"w":160,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":160,"h":100},
+	"sourceSize": {"w":160,"h":100},
+	"anchor": {"x":0.5,"y":0.9}
+},
+"blink_2.png":
+{
+	"frame": {"x":320,"y":0,"w":160,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":160,"h":100},
+	"sourceSize": {"w":160,"h":100},
+	"anchor": {"x":0.5,"y":0.9}
+},
+"blink_3.png":
+{
+	"frame": {"x":480,"y":0,"w":160,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":160,"h":100},
+	"sourceSize": {"w":160,"h":100},
+	"anchor": {"x":0.5,"y":0.9}
+},
+"blink_4.png":
+{
+	"frame": {"x":640,"y":0,"w":160,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":160,"h":100},
+	"sourceSize": {"w":160,"h":100},
+	"anchor": {"x":0.5,"y":0.9}
+},
+"blink_5.png":
+{
+	"frame": {"x":800,"y":0,"w":160,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":160,"h":100},
+	"sourceSize": {"w":160,"h":100},
+	"anchor": {"x":0.5,"y":0.9}
+},
+"blink_6.png":
+{
+	"frame": {"x":960,"y":0,"w":160,"h":100},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":160,"h":100},
+	"sourceSize": {"w":160,"h":100},
+	"anchor": {"x":0.5,"y":0.9}
+}},
+"animations": {
+	"blink": ["blink_0.png","blink_1.png","blink_2.png","blink_3.png","blink_4.png","blink_5.png","blink_6.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "blink.png",
+	"format": "RGBA8888",
+	"size": {"w":1120,"h":100},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:c751e904d8318d710bb78866ad8b7961:9f6e8a9195b85b036fea262338415814:67cfac9e17410e508afbcf4e4803bb8d$"
+}
+}

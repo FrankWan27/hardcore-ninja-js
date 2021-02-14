@@ -22,9 +22,9 @@ class Shockwave {
             particle.beginFill(0x40C4FF)
             //particle.lineStyle(1, 0x008dcc)
             particle.drawPolygon([
-                2 * i + 0, 0,             
-                2 * i + this.size , -this.size * (Math.random() * 8 + 6), //random height between 6 and 14        
-                2 * i + this.size * 2, 0              
+                -this.numParticles + 2 * i + 0, 0,             
+                -this.numParticles + 2 * i + this.size , -this.size * (Math.random() * 8 + 6), //random height between 6 and 14        
+                -this.numParticles + 2 * i + this.size * 2, 0              
             ])
             particle.rotation = Math.random() - 0.5
             particle.endFill()

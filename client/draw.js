@@ -21,6 +21,7 @@ document.body.appendChild(app.view);
 loader
 .add("./client/sprites/moveIndicator.json")
 .add("./client/sprites/shockwave.json")
+.add("./client/sprites/blink.json")
 .load(setup);
 
 var players = {}
@@ -49,6 +50,22 @@ class moveIndicator {
         this.sprite.scale.set(0.5, 0.4)
         this.sprite.position.set(x, y)
         this.sprite.animationSpeed = 0.4
+        this.sprite.loop = false
+        this.sprite.alpha = 0.8
+        this.sprite.play()
+        app.stage.addChild(this.sprite)
+
+        this.sprite.onComplete = () => {
+            this.sprite.destroy()
+        }
+    }
+}
+
+class blinkSprite {
+    constructor(x, y) {
+        this.sprite = new PIXI.AnimatedSprite(resources["./client/sprites/blink.json"].spritesheet.animations["blink"])
+        this.sprite.position.set(x, y)
+        this.sprite.animationSpeed = 0.3
         this.sprite.loop = false
         this.sprite.alpha = 0.8
         this.sprite.play()
