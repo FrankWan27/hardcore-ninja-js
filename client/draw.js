@@ -22,6 +22,7 @@ loader
 .add("./client/sprites/moveIndicator.json")
 .add("./client/sprites/shockwave.json")
 .add("./client/sprites/blink.json")
+.add("./client/sprites/skills.json")
 .load(setup);
 
 var players = {}
@@ -30,11 +31,11 @@ var shockwaves = {}
 function setup() {
     app.ticker.add(delta => gameLoop(delta))
     app.renderer.backgroundColor = 0x795548
-    
+    cooldowns = new Cooldown()
 }
 
 
-function gameLoop() {
+function gameLoop(delta) {
     for(let id in players) {
         players[id].connectionHealth--
         if (players[id].connectionHealth < 0) {
@@ -42,6 +43,8 @@ function gameLoop() {
             delete players[id]
         }
     }
+    
+    cooldowns.update()
 }
 
 class moveIndicator {

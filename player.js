@@ -9,6 +9,8 @@ class Player {
         this.position = new Vector(x, y)
         this.target = this.position.clone()
         this.speed = 5
+        this.shield = false
+        this.shieldDuration = 0
     }
 
     moveTo(target) {
@@ -21,7 +23,14 @@ class Player {
         this.target = this.position.clone()
     }
 
-    update() {
+    applyShield() {
+        this.shield = true
+        this.shieldDuration = 700
+    }
+
+    update(delta) {
+        this.shield = this.shieldDuration > 0
+        this.shieldDuration -= delta
         let direction = Vector.sub(this.target, this.position).limit(this.speed)
         this.position.add(direction)
     }
@@ -42,7 +51,7 @@ class Player {
             return false
         }
         if(Vector.sub(shockwave.position, this.position).magSq() < HITBOX ** 2) {
-            return true
+            return !this.shield
         }
         return false
     }

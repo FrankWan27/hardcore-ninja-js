@@ -31,11 +31,15 @@ class Game {
         this.players[id].blinkTo(target)
     }
 
+    shieldPlayer(id) {
+        this.players[id].applyShield()
+    }
+
     addShockwave(player, x, y) {
         this.shockwaves.push(new Shockwave(player.position.x, player.position.y, x, y, player.id))
     }
 
-    update() {
+    update(delta) {
         for(let i = this.shockwaves.length - 1; i >= 0; i--) {
             let shockwave = this.shockwaves[i]
             shockwave.update()
@@ -45,7 +49,7 @@ class Game {
             }
         }
         for(let id in this.players) {
-            this.players[id].update()
+            this.players[id].update(delta)
             let killer = this.players[id].checkCollisions(this.shockwaves)
             if(killer) {
                 this.scoreboard.playerKill(killer, id)

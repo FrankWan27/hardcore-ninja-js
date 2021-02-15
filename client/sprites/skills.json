@@ -1,0 +1,48 @@
+{"frames": {
+
+"e.png":
+{
+	"frame": {"x":0,"y":0,"w":59,"h":59},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":59,"h":59},
+	"sourceSize": {"w":59,"h":59},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"q.png":
+{
+	"frame": {"x":59,"y":0,"w":59,"h":59},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":59,"h":59},
+	"sourceSize": {"w":59,"h":59},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"r.png":
+{
+	"frame": {"x":118,"y":0,"w":59,"h":59},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":59,"h":59},
+	"sourceSize": {"w":59,"h":59},
+	"anchor": {"x":0.5,"y":0.5}
+},
+"w.png":
+{
+	"frame": {"x":177,"y":0,"w":59,"h":59},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":59,"h":59},
+	"sourceSize": {"w":59,"h":59},
+	"anchor": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "skills.png",
+	"format": "RGBA8888",
+	"size": {"w":236,"h":59},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e8f518455909efb441b9cb28becd2420:85f21ba845248647f6f4fc7031adb136:20d7fbf18d411ac4799541425ba57c0a$"
+}
+}

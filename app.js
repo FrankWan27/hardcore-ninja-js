@@ -5,6 +5,7 @@ const io = require('socket.io')(serv,{})
 const Game = require('./game')
 const Vector = require('./vector')
 
+const TICKRATE = 1000/64 //64 ticks per second
 const socketList = {}
 const game = new Game(socketList)
 
@@ -39,6 +40,10 @@ io.sockets.on('connection', (socket) => {
 
 	socket.on('key-press', (data) => {
 		let player = game.players[socket.id]
+		if(data.input === "q") {
+			console.log('shield')
+			game.shieldPlayer(socket.id)
+		}
 		if(data.input === "w") {
 			console.log('blink')
 			game.blinkPlayer(socket.id, Vector.of(data.x, data.y))
@@ -54,9 +59,9 @@ io.sockets.on('connection', (socket) => {
 
 setInterval(() => {
 	//calculate players
-	game.update()
+	game.update(TICKRATE)
 
-	//player positions
+	//player info
 	var pack = {}
 	pack.players = []
 
@@ -65,7 +70,8 @@ setInterval(() => {
 		pack.players.push({
 			id: id,
 			x: player.position.x,
-			y: player.position.y
+			y: player.position.y,
+			shield: player.shield
 		}) 
 	}
 
@@ -84,4 +90,4 @@ setInterval(() => {
 		let socket = socketList[id]
 		socket.emit('update', pack)
 	}
-}, 15.625) //64 ticks per second
+}, TICKRATE) 

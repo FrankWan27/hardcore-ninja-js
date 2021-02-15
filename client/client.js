@@ -5,6 +5,7 @@ var mouseY = -1;
 var myId = -1;
 
 var socket = io() 
+var cooldowns
 
 document.onmousemove = function(event)
 {
@@ -29,6 +30,7 @@ socket.on('update', (data) => {
             players[player.id] = new Player(player.id)
         }
         players[player.id].move(Vector.of(player.x, player.y))
+        players[player.id].toggleShield(player.shield)
         players[player.id].heartbeat()
     })
 
@@ -52,35 +54,51 @@ socket.on('shockwave-die', (data) => {
 })
 
 document.onkeydown = function(event){
-    if(event.key === "q")	
-        socket.emit('key-press', {
-            input:'q', 
-            x: mouseX, 
-            y: mouseY
-        });
-    if(event.key === "w") { //blink 
-        new blinkSprite(players[myId].sprite.position.x, players[myId].sprite.position.y)
-        socket.emit('key-press', {
-            input:'w', 
-            x: mouseX, 
-            y: mouseY
-        });
+    if(event.key === 'q') {	
+        if(cooldowns.isReady('q')) {
+            cooldowns.usedSkill('q')
+            socket.emit('key-press', {
+                input:'q', 
+                x: mouseX, 
+                y: mouseY
+            })
+        }
     }
-    if(event.key === "e") {
-        socket.emit('key-press', {
-            input:'e', 
-            x: mouseX, 
-            y: mouseY
-        });
+    if(event.key === 'w') {
+        if(cooldowns.isReady('w')) {
+            cooldowns.usedSkill('w')
+            new blinkSprite(players[myId].sprite.position.x, players[myId].sprite.position.y)
+            socket.emit('key-press', {
+                input:'w', 
+                x: mouseX, 
+                y: mouseY
+            })
+        }
     }
-    if(event.key === "r")	
-        socket.emit('key-press', {
-            input:'r', 
-            x: mouseX, 
-            y: mouseY
-        });
-    if(event.key == "s") 
+    if(event.key === 'e') {
+        if(cooldowns.isReady('e')) {
+            cooldowns.usedSkill('e')
+            socket.emit('key-press', {
+                input:'e', 
+                x: mouseX, 
+                y: mouseY
+            })
+        }
+    }
+    if(event.key === 'r') {
+        if(cooldowns.isReady('r')) {
+            cooldowns.usedSkill('r')
+            socket.emit('key-press', {
+                input:'r', 
+                x: mouseX, 
+                y: mouseY
+            })
+        }
+    }
+    if(event.key == 's') {
         socket.emit('key-press', {
             input:'s'
         })
+    }
 }
+
