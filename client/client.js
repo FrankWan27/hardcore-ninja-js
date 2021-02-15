@@ -86,13 +86,15 @@ document.onkeydown = function(event){
         }
     }
     if(event.key === 'r') {
-        if(cooldowns.isReady('r')) {
-            cooldowns.usedSkill('r')
-            socket.emit('key-press', {
-                input:'r', 
-                x: mouseX, 
-                y: mouseY
-            })
+        let id = mouseOnTarget(mouseX, mouseY)
+        if(id) {
+            if(cooldowns.isReady('r')) {
+                cooldowns.usedSkill('r')
+                socket.emit('key-press', {
+                    input:'r', 
+                    target: id
+                })
+            }
         }
     }
     if(event.key == 's') {
@@ -102,3 +104,17 @@ document.onkeydown = function(event){
     }
 }
 
+function mouseOnTarget(x, y) {
+    for(let id in players) {
+        if(id == myId) {
+            continue
+        }
+        let playerVec = new Vector(players[id].sprite.position.x, players[id].sprite.position.y)
+        let mouseVec = new Vector(x, y)
+        
+        if(Vector.sub(playerVec, mouseVec).magSq() < 25 ** 2) { //hitbox = 25 
+            return id
+        }
+    }
+    return null
+}
