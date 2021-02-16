@@ -22,6 +22,7 @@ loader
 .add("./client/sprites/moveIndicator.json")
 .add("./client/sprites/shockwave.json")
 .add("./client/sprites/blink.json")
+.add("./client/sprites/land.json")
 .add("./client/sprites/skills.json")
 .load(setup);
 
@@ -47,35 +48,48 @@ function gameLoop(delta) {
     cooldowns.update()
 }
 
-class moveIndicator {
-    constructor(x, y) {
-        this.sprite = new PIXI.AnimatedSprite(resources["./client/sprites/moveIndicator.json"].spritesheet.animations["pixil-frame"])
-        this.sprite.scale.set(0.5, 0.4)
-        this.sprite.position.set(x, y)
-        this.sprite.animationSpeed = 0.4
-        this.sprite.loop = false
-        this.sprite.alpha = 0.8
-        this.sprite.play()
-        app.stage.addChild(this.sprite)
+class quickSprites {
+    static moveIndicator(x, y) {
+        let sprite = new PIXI.AnimatedSprite(resources["./client/sprites/moveIndicator.json"].spritesheet.animations["pixil-frame"])
+        sprite.scale.set(0.5, 0.4)
+        sprite.position.set(x, y)
+        sprite.animationSpeed = 0.4
+        sprite.loop = false
+        sprite.alpha = 0.8
+        sprite.play()
+        app.stage.addChild(sprite)
 
-        this.sprite.onComplete = () => {
-            this.sprite.destroy()
+        sprite.onComplete = () => {
+            sprite.destroy()
         }
     }
-}
 
-class blinkSprite {
-    constructor(x, y) {
-        this.sprite = new PIXI.AnimatedSprite(resources["./client/sprites/blink.json"].spritesheet.animations["blink"])
-        this.sprite.position.set(x, y)
-        this.sprite.animationSpeed = 0.3
-        this.sprite.loop = false
-        this.sprite.alpha = 0.8
-        this.sprite.play()
-        app.stage.addChild(this.sprite)
+    static blink(x, y) {
+        let sprite = new PIXI.AnimatedSprite(resources["./client/sprites/blink.json"].spritesheet.animations["blink"])
+        sprite.position.set(x, y)
+        sprite.animationSpeed = 0.3
+        sprite.loop = false
+        sprite.alpha = 0.8
+        sprite.play()
+        app.stage.addChild(sprite)
 
-        this.sprite.onComplete = () => {
-            this.sprite.destroy()
+        sprite.onComplete = () => {
+            sprite.destroy()
         }
+    }
+
+    static land(x, y) {
+        let sprite = new PIXI.AnimatedSprite(resources["./client/sprites/land.json"].spritesheet.animations["land"])
+        sprite.position.set(x, y)
+        sprite.anchor.set(0.5, 0.75)
+        sprite.animationSpeed = 0.3
+        sprite.loop = false
+        sprite.alpha = 0.8
+        sprite.play()
+        app.stage.addChild(sprite)
+
+        sprite.onComplete = () => {
+            sprite.destroy()
+        }      
     }
 }

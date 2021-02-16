@@ -19,7 +19,7 @@ document.addEventListener('contextmenu', (e) => {
         y: mouseY
     })
     
-    new moveIndicator(mouseX, mouseY)
+    quickSprites.moveIndicator(mouseX, mouseY)
 
     e.preventDefault();
 });
@@ -41,6 +41,11 @@ socket.on('update', (data) => {
         else {        
             shockwaves[shockwave.id].move(Vector.of(shockwave.x, shockwave.y))
         }
+    })
+
+    data.blinks.forEach((blink) => {
+        quickSprites.blink(blink.x, blink.y)
+        quickSprites.land(blink.x2, blink.y2)
     })
 }) 
 
@@ -67,7 +72,6 @@ document.onkeydown = function(event){
     if(event.key === 'w') {
         if(cooldowns.isReady('w')) {
             cooldowns.usedSkill('w')
-            new blinkSprite(players[myId].sprite.position.x, players[myId].sprite.position.y)
             socket.emit('key-press', {
                 input:'w', 
                 x: mouseX, 

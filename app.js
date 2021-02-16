@@ -7,6 +7,7 @@ const Vector = require('./vector')
 
 const TICKRATE = 1000/64 //64 ticks per second
 const socketList = {}
+var blinkSprites = []
 const game = new Game(socketList)
 
 app.get('/', (req, res) => {
@@ -45,8 +46,15 @@ io.sockets.on('connection', (socket) => {
 			game.shieldPlayer(socket.id)
 		}
 		if(data.input === "w") {
-			console.log('blink')
+			let oldX = game.players[socket.id].position.x
+			let oldY = game.players[socket.id].position.y
 			game.blinkPlayer(socket.id, Vector.of(data.x, data.y))
+			blinkSprites.push({
+				x: oldX,
+				y: oldY,
+				x2: game.players[socket.id].position.x,
+				y2: game.players[socket.id].position.y
+			})
 		}
 		if(data.input === "e") {
 			game.addShockwave(player, data.x, data.y)
@@ -86,8 +94,13 @@ setInterval(() => {
 		})
 	})
 
+	//blinks
+	pack.blinks = blinkSprites
+
 	for(let id in socketList) {
 		let socket = socketList[id]
 		socket.emit('update', pack)
 	}
+
+	blinkSprites = []
 }, TICKRATE) 
