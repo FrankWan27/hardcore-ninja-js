@@ -188,6 +188,10 @@ class Vector {
     static of(x, y, z) {
         return new Vector(x, y, z)
     }
+
+    static fromTheta(theta) {
+        return new Vector(Math.cos(theta), Math.sin(theta))
+    }
 }
 
 module.exports = Vector

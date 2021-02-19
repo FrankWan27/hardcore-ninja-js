@@ -36,7 +36,7 @@ class Game {
     }
 
     addShockwave(player, x, y) {
-        this.shockwaves.push(new Shockwave(player.position.x, player.position.y, x, y, player.id))
+        this.shockwaves.push(new Shockwave(player, x, y))
     }
 
     update(delta) {

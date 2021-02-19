@@ -79,6 +79,7 @@ setInterval(() => {
 			id: id,
 			x: player.position.x,
 			y: player.position.y,
+			rotation: player.rotation,
 			shield: player.shield
 		}) 
 	}

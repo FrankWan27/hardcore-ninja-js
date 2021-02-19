@@ -7,6 +7,7 @@ class Player {
     constructor(id, x, y) {
         this.id = id
         this.position = new Vector(x, y)
+        this.rotation = 0
         this.target = this.position.clone()
         this.speed = 5
         this.shield = false
@@ -20,6 +21,7 @@ class Player {
     blinkTo(target) {
         let desiredBlink = Vector.sub(target, this.position)
         this.position.add(desiredBlink.limit(BLINK_RANGE))
+        this.rotation = desiredBlink.heading() + Math.PI / 2
         this.target = this.position.clone()
     }
 
@@ -32,6 +34,9 @@ class Player {
         this.shield = this.shieldDuration > 0
         this.shieldDuration -= delta
         let direction = Vector.sub(this.target, this.position).limit(this.speed)
+        if(direction.magSq() > 0) {
+            this.rotation = direction.heading() + Math.PI / 2
+        }
         this.position.add(direction)
     }
 

@@ -8,8 +8,9 @@ class Player {
         this.connectionHealth = 60
     }
 
-    move(target) {
+    move(target, rotation) {
         this.sprite.position.set(...target.asArray())
+        this.sprite.rotation = rotation
         this.shieldSprite.position.set(...target.asArray())
     }
 
@@ -30,7 +31,7 @@ class Player {
             .lineStyle(4, 0x9966FF, 1)
             .drawCircle(0, 0, 32)
             .endFill()
-                
+
         this.shieldSprite.alpha = 0.3
     }
 

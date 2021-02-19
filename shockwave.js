@@ -1,12 +1,16 @@
 const Vector = require("./vector")
 
 class Shockwave {
-    constructor(startX, startY, targetX, targetY, owner) {
-        this.position = Vector.of(startX, startY)
+    constructor(player, targetX, targetY) {
+        this.position = Vector.of(player.position.x, player.position.y)
         this.target = Vector.of(targetX, targetY)
         this.speed = 24
+
         this.direction = Vector.sub(this.target, this.position).setMag(this.speed)
-        this.owner = owner
+        if(this.direction.magSq() == 0) {
+            this.direction = Vector.fromTheta(player.rotation -  Math.PI / 2).setMag(this.speed)
+        }
+        this.owner = player.id
         this.lifespan = 20
         this.dead = false
         this.id = Math.random()

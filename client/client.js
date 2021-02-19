@@ -29,7 +29,7 @@ socket.on('update', (data) => {
         if(!(player.id in players)) {
             players[player.id] = new Player(player.id)
         }
-        players[player.id].move(Vector.of(player.x, player.y))
+        players[player.id].move(Vector.of(player.x, player.y), player.rotation)
         players[player.id].toggleShield(player.shield)
         players[player.id].heartbeat()
     })
