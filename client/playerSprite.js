@@ -1,6 +1,7 @@
 class Player {
-    constructor(id) {
+    constructor(id, team) {
         this.id = id
+        this.team = team
         this.size = 20
         this.drawSprite()
         this.renderShieldSprite()
@@ -10,18 +11,39 @@ class Player {
 
     move(target, rotation) {
         this.sprite.position.set(...target.asArray())
-        this.sprite.rotation = rotation
+        this.rotateSprite(rotation)
         this.shieldSprite.position.set(...target.asArray())
     }
 
+    rotateSprite(theta) {
+        theta = (theta + (Math.PI * 2))
+        theta = theta % (Math.PI * 2)
+        if(theta > 0 && theta < Math.PI / 4) {
+            this.sprite.rotation = 0
+        } else if(theta < 3 * Math.PI / 4) {
+            this.sprite.rotation = Math.PI / 2
+        } else if(theta < 5 * Math.PI / 4) {
+            this.sprite.rotation = Math.PI 
+        } else if(theta < 7 * Math.PI / 4) {
+            this.sprite.rotation = 3 * Math.PI / 2
+        } else {
+            this.sprite.rotation = 0
+        }
+    }
+
     drawSprite() {
+        let color = this.team == 1 ? 0xFF3300 : 0x0033FF
         this.sprite = new PIXI.Graphics()
-            .lineStyle(4, 0xFF3300, 1)
+            .lineStyle(4, color, 1)
             .beginFill(0x66CCFF)
-            .drawRect(0, 0, this.size, this.size)
+            .drawPolygon([
+                -this.size, this.size,             
+                0, -this.size,  
+                this.size, this.size             
+            ])
             .endFill()
         
-        this.sprite.pivot.set(this.size / 2, this.size / 2)
+        this.sprite.pivot.set(0, 0)
         app.stage.addChild(this.sprite);
     }
 

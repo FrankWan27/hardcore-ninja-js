@@ -74,9 +74,12 @@ setInterval(() => {
 	pack.players = []
 
 	for(let id in socketList) {
+
 		let player = game.players[id]
 		pack.players.push({
+			dead: player.dead,
 			id: id,
+			team: game.players[id].team,
 			x: player.position.x,
 			y: player.position.y,
 			rotation: player.rotation,

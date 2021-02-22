@@ -4,7 +4,7 @@ const BLINK_RANGE = 400
 const HITBOX = 25
 
 class Player {
-    constructor(id, x, y) {
+    constructor(id, team, x, y) {
         this.id = id
         this.position = new Vector(x, y)
         this.rotation = 0
@@ -12,6 +12,8 @@ class Player {
         this.speed = 5
         this.shield = false
         this.shieldDuration = 0
+        this.team = team
+        this.dead = false
     }
 
     moveTo(target) {
@@ -31,6 +33,10 @@ class Player {
     }
 
     update(delta) {
+        if(this.dead) {
+            this.position = new Vector(-100, -100)
+            return
+        }
         this.shield = this.shieldDuration > 0
         this.shieldDuration -= delta
         let direction = Vector.sub(this.target, this.position).limit(this.speed)
@@ -38,6 +44,7 @@ class Player {
             this.rotation = direction.heading() + Math.PI / 2
         }
         this.position.add(direction)
+
     }
 
     checkCollisions(shockwaves) {
@@ -52,7 +59,7 @@ class Player {
     }
 
     checkCollision(shockwave) {
-        if(shockwave.owner == this.id) {
+        if(shockwave.team == this.team) {
             return false
         }
         if(Vector.sub(shockwave.position, this.position).magSq() < HITBOX ** 2) {

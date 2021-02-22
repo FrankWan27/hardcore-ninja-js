@@ -3,6 +3,7 @@
 var mouseX = -1;
 var mouseY = -1;
 var myId = -1;
+var amDead = false
 
 var socket = io() 
 var cooldowns
@@ -27,11 +28,18 @@ document.addEventListener('contextmenu', (e) => {
 socket.on('update', (data) => {
     data.players.forEach((player) => {
         if(!(player.id in players)) {
-            players[player.id] = new Player(player.id)
+            players[player.id] = new Player(player.id, player.team)
         }
         players[player.id].move(Vector.of(player.x, player.y), player.rotation)
         players[player.id].toggleShield(player.shield)
         players[player.id].heartbeat()
+        if(player.id == myId) {
+            if(player.dead) {
+                amDead = true
+            } else {
+                amDead = false
+            }
+        }
     })
 
     data.shockwaves.forEach((shockwave) => {
@@ -49,6 +57,17 @@ socket.on('update', (data) => {
     })
 }) 
 
+socket.on('update-kd', (data) => {
+    console.log(data)
+})
+
+socket.on('update-roundscore', (data) => {
+    for(let team in data) {
+        console.log('Team ' + team + ': ' + data[team])
+    }
+})
+
+
 socket.on('id', (id) => {
     myId = id
 })
@@ -59,6 +78,9 @@ socket.on('shockwave-die', (data) => {
 })
 
 document.onkeydown = function(event){
+    if(amDead) {
+        return
+    }
     if(event.key === 'q') {	
         if(cooldowns.isReady('q')) {
             cooldowns.usedSkill('q')

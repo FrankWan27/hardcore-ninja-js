@@ -11,6 +11,7 @@ class Shockwave {
             this.direction = Vector.fromTheta(player.rotation -  Math.PI / 2).setMag(this.speed)
         }
         this.owner = player.id
+        this.team = player.team
         this.lifespan = 20
         this.dead = false
         this.id = Math.random()
